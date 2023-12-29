@@ -1,3 +1,4 @@
+import Hero from '@/components/hero/Hero';
 import { useEffect } from 'react';
 
 const HomePage = () => {
@@ -7,18 +8,7 @@ const HomePage = () => {
 
   return (
     <>
-      <section
-        style={{ width: '100%', height: '100vh', background: 'red' }}
-        id="users"
-      >
-        users
-      </section>
-      <section
-        style={{ width: '100%', height: '100vh', background: 'blue' }}
-        id="signUp"
-      >
-        signUp
-      </section>
+     <Hero/>
     </>
   );
 };

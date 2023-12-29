@@ -10,7 +10,7 @@ const Header = () => {
           <LogoIcon />
           <div className={styles.linkWrapper}>
             <AnchorLink text="Users" href="/#users" />
-            <AnchorLink text="signUp" href="/#signUp" />
+            <AnchorLink text="Sign up" href="/#signUp" />
           </div>
         </div>
       </div>

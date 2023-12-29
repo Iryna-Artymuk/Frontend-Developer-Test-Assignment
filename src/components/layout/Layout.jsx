@@ -4,12 +4,12 @@ import Header from '../main/Header/Header';
 
 const Layout = () => {
   return (
-    <Container>
+    <>
       <Header />
       <main>
         <Outlet />
       </main>
-    </Container>
+    </>
   );
 };
 export default Layout;
