@@ -36,6 +36,23 @@ const useUsersStore = create((set, get) => ({
       throw new Error(error);
     }
   },
+  getPositions: async () => {
+    try {
+      const response = await axios.get(`/positions`);
+      if (response.status === 200) {
+        return response;
+      } else {
+        throw new Error(response.statusText);
+      }
+    } catch (error) {
+      set(() => {
+        return {
+          error: error,
+        };
+      });
+      throw new Error(error);
+    }
+  },
 
   // getOnePost: async id => {
   //   try {

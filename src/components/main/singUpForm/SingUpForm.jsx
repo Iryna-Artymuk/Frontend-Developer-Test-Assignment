@@ -1,3 +1,4 @@
+import FormData from 'form-data';
 import Container from '@/components/container/Container';
 import styles from './SingUpForm.module.scss';
 import Button from '@/components/ui/Buttons/hashLink/button/Button';
@@ -7,16 +8,45 @@ import TextInput from '@/components/formik/TextInput/TextInput';
 import EmailInput from '@/components/formik/EmailInput/EmailInput';
 import NumberInput from '@/components/formik/NumberInput/NumberInput';
 import FileInput from '@/components/formik/FileInput/FileInput';
+import { useEffect, useState } from 'react';
+import useUsersStore from '@/store/usersStore';
+import { validationSchema } from './validationSchema';
 
 const initialValues = {
   name: '',
   email: '',
-  number: '',
+  phone: '',
   avatar: '',
   position: '',
 };
 
 const SingUpForm = () => {
+  const { getPositions } = useUsersStore();
+  const [positions, setPositions] = useState();
+  console.log('positions: ', positions);
+  useEffect(() => {
+    const fetchNews = async () => {
+      const responce = await getPositions();
+      if (responce.status === 200) {
+        setPositions(responce.data.positions);
+      }
+    };
+    fetchNews();
+  }, [getPositions]);
+  const onSubmit = value => {
+    const formData = new FormData();
+    formData.append('position_id', value.position);
+    formData.append('name', value.name);
+    formData.append('email', value.email);
+    formData.append('phone', value.phone);
+    formData.append('photo', value.avatar[0]);
+
+    try {
+      console.log('  formData : ', formData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <section>
       <Container>
@@ -25,8 +55,8 @@ const SingUpForm = () => {
 
           <Formik
             initialValues={initialValues}
-            //   validationSchema={validation}
-            //   onSubmit={onSubmit}
+            validationSchema={validationSchema}
+            onSubmit={onSubmit}
           >
             {formik => {
               return (
@@ -45,9 +75,9 @@ const SingUpForm = () => {
                       component={EmailInput}
                     />
                     <Field
-                      name="number"
-                      id="number"
-                      placeholder="number"
+                      name="phone"
+                      id="phone"
+                      placeholder="phone"
                       component={NumberInput}
                     />
                     <Field

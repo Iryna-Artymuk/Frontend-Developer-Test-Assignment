@@ -4,4 +4,7 @@
   background: $primary-color;
   color: inherit;
   border-radius: 80px;
+  &:disabled {
+    background: $gray;
+  }
 }

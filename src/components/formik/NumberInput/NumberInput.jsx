@@ -25,19 +25,19 @@ const NumberInput = ({
     setIsFocused(name);
   };
 
-  const getBorderColor = () => {
-    if (isFocused === name) {
-      return styles.blueBorder;
-    }
-    if (errors?.[field.name]) {
-      return styles.redBorder;
-    }
-    if (!errors?.[field.name] && !isFocused === name) {
-      return styles.greenBorder;
-    } else {
-      return styles.grayBorder;
-    }
-  };
+ const getBorderColor = () => {
+   if (errors?.[field.name] && isFocused === name) {
+     return styles.redBorder;
+   }
+   if (!errors?.[field.name] && !isFocused === name) {
+     return styles.greenBorder;
+   } else {
+     if (isFocused === name) {
+       return styles.blueBorder;
+     }
+     return styles.grayBorder;
+   }
+ };
 
   return (
     <div className={styles.inputWrapper}>
