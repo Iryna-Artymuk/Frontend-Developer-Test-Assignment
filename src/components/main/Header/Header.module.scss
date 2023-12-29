@@ -4,18 +4,18 @@
   left: 0;
   right: 0;
   z-index: 9999;
-  max-width: 100vw;
+  max-width: 1170px;
   padding: 17px 16px;
-  background-color: $background;
-
-  @include tabletSmall {
+  background-color: $header-background;
+  margin: 0 auto;
+  @include tablet {
     padding: 17px 32px;
   }
   @include tabletBig {
     padding: 17px 60px;
   }
   @include desktop {
-    padding: 17px 0;
+    padding: 17px 0px;
   }
 }
 

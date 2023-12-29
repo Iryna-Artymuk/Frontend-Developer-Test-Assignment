@@ -1,10 +1,4 @@
 .title {
   @include font(40px, 400, 1);
-
-  // @include tablet {
-  // }
-  // @include desktop {
-  //   @include font(32px, 700, 1);
-  //   // margin-bottom: 12px;
-  // }
+  text-align: center;
 }

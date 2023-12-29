@@ -1,0 +1,57 @@
+.contentWrapper {
+  @extend%aligncenter;
+  flex-direction: column;
+  padding: 140px 0 140px;
+  gap: 50px;
+  h2 {
+    width: 328px;
+  }
+  @include tablet {
+    width: 704px;
+  }
+}
+.list {
+  @extend%aligncenter;
+  flex-wrap: wrap;
+  gap: 20px;
+  scroll-margin: 68px;
+  @include tablet {
+    gap: 16px;
+  }
+  @include tabletBig {
+    gap: 29px;
+  }
+}
+
+.listItem {
+  width: 282px;
+  height: 254px;
+  border-radius: 16px;
+  background: $card-background;
+}
+
+.userInfoWrapper {
+  padding: 20px;
+  @extend%aligncenter;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 20px;
+}
+
+.name {
+  width: 100%;
+  text-align: center;
+  text-wrap: nowrap;
+  overflow: auto;
+}
+.photo {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+.userInfo {
+  @extend%aligncenter;
+  flex-direction: column;
+  width: 100%;
+  overflow: auto;
+}

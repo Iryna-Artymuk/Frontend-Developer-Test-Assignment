@@ -1,14 +1,44 @@
 import Hero from '@/components/hero/Hero';
-import { useEffect } from 'react';
+import UsersList from '@/components/usersList/UsersList';
+import useUsersStore from '@/store/usersStore';
+import { useEffect, useState } from 'react';
 
 const HomePage = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const { getUsers } = useUsersStore();
+  const [users, setUsers] = useState([]);
+  console.log('users: ', users);
 
+  const loading = useUsersStore(state => state.loading);
+  const [page, setPage] = useState(1);
+  const [count] = useState(6);
+  const [isMount, setIsMount] = useState(true);
+  useEffect(
+    () => {
+      if (isMount) {
+        setIsMount(false);
+        return;
+      }
+      const fetchNews = async () => {
+        const responce = await getUsers(page, count);
+        if (responce.status === 200) {
+          setUsers(prev => [...prev, ...responce.data.users]);
+        }
+      };
+      fetchNews();
+    },
+    [getUsers, page, count, isMount],
+    isMount
+  );
+
+  const handelShowMore = () => {
+    console.log(page);
+    setPage(prev => prev + 1);
+  };
   return (
     <>
-     <Hero/>
+      <Hero />
+
+      <UsersList users={users} handelShowMore={handelShowMore} />
     </>
   );
 };

@@ -20,7 +20,7 @@ body {
   color: rgba(0, 0, 0, 0.87);
   font-family: 'Nunito', sans-serif;
   font-size: 16px;
-  line-height: 1.62;
+  background: $background-color;
 }
 main {
   margin-top: 68px;
@@ -33,6 +33,7 @@ h5,
 h6,
 p {
   margin: 0;
+  line-height: 1.62;
 }
 
 img {
