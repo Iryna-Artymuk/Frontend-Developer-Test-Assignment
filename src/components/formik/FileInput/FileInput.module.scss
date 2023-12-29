@@ -1,0 +1,63 @@
+.wrapper {
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+
+  border-radius: 4px;
+  background: $card-background;
+  .input {
+    width: 100%;
+  }
+  .dropzone {
+    @extend%aligncenter;
+    justify-content: flex-start;
+    width: 100%;
+    height: 57px;
+    .upload {
+      height: 100%;
+      padding: 14px 15px;
+      border-radius: 4px 0px 0px 4px;
+      border: 1px solid var(--Black-87, rgba(0, 0, 0, 0.87));
+    }
+    .text {
+      height: 100%;
+      padding: 14px 0 14px 16px;
+      color: $gray;
+    }
+  }
+  .imagePreview {
+    width: 100px;
+    height: 100%;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+  }
+  .errorWrap {
+    width: 100px;
+  }
+
+  .errorMessage {
+    color: $red;
+    font-size: 12px;
+    font-weight: 500;
+  }
+}
+.redBorder {
+  border: 1px solid $red;
+}
+
+.greenBorder {
+  border: 1px solid $green;
+}
+
+.grayBorder {
+  border: 1px solid $gray;
+}
+.blueBorder {
+  border: 1px solid $blue;
+}

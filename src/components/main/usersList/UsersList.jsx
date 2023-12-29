@@ -1,6 +1,6 @@
 import useUsersStore from '@/store/usersStore';
-import Button from '../button/Button';
-import Container from '../container/Container';
+import Button from '../../ui/Buttons/hashLink/button/Button';
+import Container from '../../container/Container';
 import User from './User';
 import styles from './UsersList.module.scss';
 import { useEffect, useState } from 'react';

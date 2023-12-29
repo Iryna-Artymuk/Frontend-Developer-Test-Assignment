@@ -1,5 +1,6 @@
 import Hero from '@/components/hero/Hero';
-import UsersList from '@/components/usersList/UsersList';
+import SingUpForm from '@/components/main/singUpForm/SingUpForm';
+import UsersList from '@/components/main/usersList/UsersList';
 import useUsersStore from '@/store/usersStore';
 import { useEffect, useState } from 'react';
 
@@ -34,8 +35,8 @@ const HomePage = () => {
   return (
     <>
       <Hero />
-
       <UsersList users={users} handelShowMore={handelShowMore} page={page} />
+      <SingUpForm />
     </>
   );
 };

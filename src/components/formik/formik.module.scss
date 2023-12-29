@@ -1,0 +1,67 @@
+.inputWrapper {
+  width: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 10px;
+}
+
+.input {
+  display: flex;
+  // width: 100%;
+  height: 54px;
+  padding: 14px 16px;
+  align-items: flex-start;
+  border-radius: 6px;
+  border: 1px solid $gray;
+
+  color: inherit;
+  font-size: 15px;
+  line-height: normal;
+  &::placeholder {
+    color: $gray;
+  }
+}
+.commentsWrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-self: stretch;
+}
+
+.errorWrap {
+  width: 100%;
+}
+
+.errorMessage {
+  color: $red;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.redBorder {
+  border: 1px solid $red;
+}
+
+.greenBorder {
+  border: 1px solid $green;
+}
+
+.grayBorder {
+  border: 1px solid $gray;
+}
+.blueBorder {
+  border: 1px solid $blue;
+}
+
+.redText {
+  color: $red;
+}
+.helperText {
+  color: #7e7e7e;
+  font-size: 12px;
+  line-height: 1.16;
+  margin: 4px 0 0 16px;
+}

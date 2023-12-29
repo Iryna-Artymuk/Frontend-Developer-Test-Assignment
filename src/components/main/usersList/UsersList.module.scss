@@ -7,7 +7,10 @@
     width: 328px;
   }
   @include tablet {
-    width: 704px;
+    h2 {
+   width: 704px;
+  }
+ 
   }
 }
 .list {
