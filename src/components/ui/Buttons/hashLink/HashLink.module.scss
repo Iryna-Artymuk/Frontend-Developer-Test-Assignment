@@ -1,0 +1,8 @@
+.link {
+  width: 100px;
+  height: 34px;
+  @extend%aligncenter;
+  border-radius: 80px;
+  background: $primary-color;
+  color: inherit;
+}
