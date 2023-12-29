@@ -5,7 +5,7 @@ import { isDataValid } from '@/utils/formDataValidation';
 const useUsersStore = create((set, get) => ({
   loading: false,
   error: {},
- 
+  total_pages: 0,
 
   getUsers: async (page, count) => {
     try {
@@ -13,17 +13,17 @@ const useUsersStore = create((set, get) => ({
         return {
           loading: true,
         };
-      } );
-      
+      });
+
       const response = await axios.get(`/users?page=${page}&count=${count}`);
-      if ( response.status === 200 ) {
+      if (response.status === 200) {
         set(() => {
           return {
             loading: false,
+            total_pages: response.data.total_pages,
           };
         });
-      return response; 
-        
+        return response;
       } else {
         throw new Error(response.statusText);
       }

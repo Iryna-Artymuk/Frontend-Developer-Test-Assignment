@@ -6,9 +6,6 @@ import { useEffect, useState } from 'react';
 const HomePage = () => {
   const { getUsers } = useUsersStore();
   const [users, setUsers] = useState([]);
-  console.log('users: ', users);
-
-  const loading = useUsersStore(state => state.loading);
   const [page, setPage] = useState(1);
   const [count] = useState(6);
   const [isMount, setIsMount] = useState(true);
@@ -38,7 +35,7 @@ const HomePage = () => {
     <>
       <Hero />
 
-      <UsersList users={users} handelShowMore={handelShowMore} />
+      <UsersList users={users} handelShowMore={handelShowMore} page={page} />
     </>
   );
 };
