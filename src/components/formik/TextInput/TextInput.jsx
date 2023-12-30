@@ -5,39 +5,26 @@ import styles from '../formik.module.scss';
 const TextInput = ({
   id,
   field,
-  text,
   form: { errors, handleBlur, touched, setFieldValue },
-  maxLength,
-
   placeholder,
 }) => {
-  const name = field.name;
+  // const name = field.name;
   const isFieldTouched = touched[field.name];
-  const valueLength = field.value?.length;
-  const { isFocused, setIsFocused } = useFocused();
 
-  useEffect(() => {
-    if (!text) return;
-    setFieldValue(`${name}`, text);
-  }, [text, setFieldValue, name]);
+  // const { isFocused, setIsFocused } = useFocused();
 
-  const handleFocus = () => {
-    setIsFocused(name);
-  };
+  // useEffect(() => {
+  //   if (!text) return;
+  //   setFieldValue(`${name}`, text);
+  // }, [text, setFieldValue, name]);
 
- const getBorderColor = () => {
-   if (errors?.[field.name]) {
-     return styles.redBorder;
-   }
- };
+  // const handleFocus = () => {
+  //   setIsFocused(name);
+  // };
 
-  const getInputState = () => {
-    if (valueLength > maxLength) {
-      return styles.error;
-    } else if (valueLength > 0 && !isFocused) {
-      return styles.entered;
-    } else {
-      return '';
+  const getBorderColor = () => {
+    if (errors?.[field.name]) {
+      return styles.redBorder;
     }
   };
 
@@ -46,10 +33,9 @@ const TextInput = ({
       <input
         id={id}
         type="text"
-        className={`${styles.input} ${getBorderColor()} ${getInputState()}`}
-        onFocus={handleFocus}
+        className={`${styles.input} ${getBorderColor()}`}
+        // onFocus={handleFocus}
         onBlur={handleBlur}
-        onClick={() => setIsFocused(name)}
         placeholder={placeholder ? placeholder : ''}
         {...field}
       />

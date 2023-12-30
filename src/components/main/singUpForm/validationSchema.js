@@ -6,7 +6,6 @@ import { formatBytes } from '@/utils/formatBytes';
 import * as Yup from 'yup';
 
 const sizeLimitMax = 1024 * 1024 * 5;
-const sizeLimitMin = 612; // bits
 
 const fileTypes = ['image/jpg', 'image/jpeg', 'for-url'];
 
@@ -16,7 +15,7 @@ function isValidFileType(fileType) {
 const phoneRegExp1 = /^\+?38/;
 const phoneRegExp2 = /(\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{2}[- ]?\d{2}$/;
 export const validationSchema = Yup.object().shape({
-  avatar: Yup.mixed()
+  photo: Yup.mixed()
     .test('is-value', 'user photo  required', value => {
       console.log('  value: ', value);
       return value && value.length > 0;
@@ -65,6 +64,6 @@ export const validationSchema = Yup.object().shape({
       phoneRegExp2,
       'Phone number is not valid  must match +38(xxx)xxx-xx-xx'
     ),
-  position: Yup.number().required(),
+  position_id: Yup.number().required(),
   email: Yup.string().required().email(),
 });

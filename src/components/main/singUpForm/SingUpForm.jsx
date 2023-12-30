@@ -1,7 +1,7 @@
 import FormData from 'form-data';
 import Container from '@/components/container/Container';
 import styles from './SingUpForm.module.scss';
-import Button from '@/components/ui/Buttons/hashLink/button/Button';
+import Button from '@/components/ui/Buttons/button/Button';
 
 import { Field, Formik, Form } from 'formik';
 import TextInput from '@/components/formik/TextInput/TextInput';
@@ -12,39 +12,50 @@ import { useEffect, useState } from 'react';
 import useUsersStore from '@/store/usersStore';
 import { validationSchema } from './validationSchema';
 import RadioInput from '@/components/formik/RadioInput/RadioInput';
+import useAuthStore from '@/store/authStore';
 
 const initialValues = {
-  name: '',
-  email: '',
+  photo: '',
   phone: '',
-  avatar: '',
-  position: '',
+  email: '',
+  name: '',
+  position_id: '',
 };
 
-const SingUpForm = () => {
+const SingUpForm = ({ setPage, page }) => {
+  const { register, getToken } = useAuthStore();
+  const token = useAuthStore(state => state.token);
+  const positions = useUsersStore(state => state.positions);
   const { getPositions } = useUsersStore();
-  const [positions, setPositions] = useState([]);
-  console.log('positions: ', positions);
+
   useEffect(() => {
-    const fetchNews = async () => {
-      const responce = await getPositions();
-      if (responce.status === 200) {
-        setPositions(responce.data.positions);
+    const fetchData = async () => {
+      try {
+        await getPositions();
+      } catch (error) {
+        console.log(error);
       }
     };
-    fetchNews();
+    fetchData();
   }, [getPositions]);
-  const onSubmit = (value, { resetForm }) => {
+  const onSubmit = async value => {
+    console.log('value: ', value);
     const formData = new FormData();
-    formData.append('position_id', value.position);
-    formData.append('name', value.name);
-    formData.append('email', value.email);
+    formData.append('position_id', value.position_id);
+    formData.append('name', value.name.toLowerCase());
+    formData.append('email', value.email.toLowerCase());
     formData.append('phone', value.phone);
-    formData.append('photo', value.avatar[0]);
+    formData.append('photo', value.photo[0]);
 
     try {
-      console.log('value : ', value);
-      resetForm();
+      await getToken();
+      // await register(formData, token);
+      // resetForm();
+      if (page === 1) {
+        setPage('');
+      } else {
+        setPage(1);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -83,8 +94,8 @@ const SingUpForm = () => {
                       component={TextInput}
                     />
                     <Field
-                      name="avatar"
-                      id="avatar"
+                      name="photo"
+                      id="photo"
                       //   placeholder="number"
                       component={FileInput}
                     />
@@ -99,8 +110,8 @@ const SingUpForm = () => {
                         {positions?.map(position => (
                           <Field
                             key={position.id}
-                            name="position"
-                            id="position"
+                            name="position_id"
+                            id="position_id"
                             component={RadioInput}
                             value={position?.id}
                             label={position?.name}

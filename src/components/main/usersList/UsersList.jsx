@@ -1,5 +1,5 @@
 import useUsersStore from '@/store/usersStore';
-import Button from '../../ui/Buttons/hashLink/button/Button';
+import Button from '../../ui/Buttons/button/Button';
 import Container from '../../container/Container';
 import User from './User';
 import styles from './UsersList.module.scss';

@@ -6,6 +6,7 @@ const useUsersStore = create((set, get) => ({
   loading: false,
   error: {},
   total_pages: 0,
+  positions:[],
 
   getUsers: async (page, count) => {
     try {
@@ -40,7 +41,12 @@ const useUsersStore = create((set, get) => ({
     try {
       const response = await axios.get(`/positions`);
       if (response.status === 200) {
-        return response;
+       set(() => {
+         return {
+           positions: response.data.positions,
+           loading: false,
+         };
+       });
       } else {
         throw new Error(response.statusText);
       }

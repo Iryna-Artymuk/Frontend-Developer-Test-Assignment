@@ -5,4 +5,7 @@
   border-radius: 80px;
   background: $primary-color;
   color: inherit;
+  &:hover {
+    background: $hover-background;
+  }
 }

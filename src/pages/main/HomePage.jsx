@@ -8,6 +8,7 @@ const HomePage = () => {
   const { getUsers } = useUsersStore();
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
+  console.log('page: ', page);
   const [count] = useState(6);
   const [isMount, setIsMount] = useState(true);
   useEffect(
@@ -36,7 +37,7 @@ const HomePage = () => {
     <>
       <Hero />
       <UsersList users={users} handelShowMore={handelShowMore} page={page} />
-      <SingUpForm />
+      <SingUpForm setPage={setPage} setUsers={setUsers} page={page} />
     </>
   );
 };

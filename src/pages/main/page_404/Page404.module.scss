@@ -32,3 +32,17 @@
     }
   }
 }
+.linkBack {
+  min-width: 120px;
+  padding: 10px;
+
+  background: $primary-color;
+  color: inherit;
+  border-radius: 80px;
+  &:disabled {
+    background: $gray;
+  }
+  &:hover {
+    background: $hover-background;
+  }
+}

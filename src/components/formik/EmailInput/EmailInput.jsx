@@ -5,7 +5,7 @@ import styles from '../formik.module.scss';
 const EmailInput = ({
   id,
   field,
-  text,
+
 
   form: { errors, handleBlur, touched, setFieldValue },
 
@@ -14,16 +14,16 @@ const EmailInput = ({
   const name = field.name;
   const isFieldTouched = touched[field.name];
 
-  const { isFocused, setIsFocused } = useFocused();
+  // const { isFocused, setIsFocused } = useFocused();
 
-  useEffect(() => {
-    if (!text) return;
-    setFieldValue(`${name}`, text);
-  }, [text, setFieldValue, name]);
+  // useEffect(() => {
+  //   if (!text) return;
+  //   setFieldValue(`${name}`, text);
+  // }, [text, setFieldValue, name]);
 
-  const handleFocus = () => {
-    setIsFocused(name);
-  };
+  // const handleFocus = () => {
+  //   setIsFocused(name);
+  // };
 
   const getBorderColor = () => {
     if (errors?.[field.name]) {
@@ -36,9 +36,9 @@ const EmailInput = ({
         id={id}
         type="email"
         className={`${styles.input} ${getBorderColor()} }`}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onClick={() => setIsFocused(name)}
+        // onFocus={handleFocus}
+        // onBlur={handleBlur}
+        // onClick={() => setIsFocused(name)}
         placeholder={placeholder ? placeholder : ''}
         {...field}
       />

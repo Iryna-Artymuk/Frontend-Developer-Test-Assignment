@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './Page404.module.scss';
-import NavLinkButton from '@/components/ui/Buttons/NavLinkButton/NavLinkButton';
+
+import Button from '@/components/ui/Buttons/button/Button';
 
 const Page404 = () => {
   return (
@@ -15,7 +16,9 @@ const Page404 = () => {
           сторінку не знайдено
         </p>
 
-        <NavLinkButton text={'Повернутися на головну'} href="/" />
+        <Link to="/" className={styles.linkBack}>
+          Повернутися на головну
+        </Link>
       </div>
     </div>
   );
