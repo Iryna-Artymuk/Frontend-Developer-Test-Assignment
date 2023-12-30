@@ -18,3 +18,17 @@
   flex-direction: column;
   gap: 50px;
 }
+
+.positionWrapper {
+  @extend%aligncenter;
+  align-self: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 11px;
+}
+.radioInputWrapper {
+  @extend%aligncenter;
+  flex-direction: column;
+  gap: 7px;
+  align-items: flex-start;
+}

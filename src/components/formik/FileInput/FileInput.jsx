@@ -4,6 +4,7 @@ import styles from './FileInput.module.scss';
 import Dropzone from 'react-dropzone';
 
 const FileInput = ({
+  id,
   field,
   photo,
   form: { errors, setFieldValue },
@@ -31,15 +32,13 @@ const FileInput = ({
     };
   };
   const onDrop = async files => {
-    setFieldValue('image', files);
+    setFieldValue(id, files);
     const file = files[0];
     setFileToBase64(file);
   };
   const getBorderColor = () => {
     if (errors?.[field.name]) {
       return styles.redBorder;
-    } else {
-      return styles.grayBorder;
     }
   };
   return (
@@ -62,7 +61,7 @@ const FileInput = ({
               {!imagePreview ? (
                 <p className={styles.text}>uplod your photo</p>
               ) : (
-                  <div className={styles.imagePreview}>
+                <div className={styles.imagePreview}>
                   <img src={imagePreview} />
                 </div>
               )}

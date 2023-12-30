@@ -1,0 +1,38 @@
+.inputWrapper {
+  @extend%aligncenter;
+  gap: 7px;
+  justify-content: flex-start;
+}
+.label {
+  @extend%aligncenter;
+  gap: 12px;
+  justify-content: flex-start;
+}
+.input {
+  appearance: none;
+  @extend%aligncenter;
+  width: 20px;
+  height: 20px;
+  border: 1px solid $gray;
+  border-radius: 50%;
+  transition: all 0.1s ease-in-out;
+  &::after {
+    content: '';
+    display: block;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+  }
+}
+input:checked {
+  border: 1px solid $secondary-color;
+  &::after {
+    content: '';
+    display: block;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    margin: 2px;
+    background-color: $secondary-color;
+  }
+}

@@ -18,7 +18,7 @@ function isValidFileType(fileType) {
 }
 
 export const validationSchema = Yup.object().shape({
-  avatart: Yup.mixed()
+  avatar: Yup.mixed()
     .test('is-value', 'Додайте коректне зображення', value => {
       console.log('  value: ', value);
       return value && value.length > 0;
@@ -27,10 +27,8 @@ export const validationSchema = Yup.object().shape({
       value && value[0]?.size === 0 && value[0]?.type === 'for-url';
       return true;
     })
-    .test(
-      'is-valid-type',
-      'Зображення має бути в форматі .jpg, .png або .webp',
-      value => isValidFileType(value && value[0]?.type)
+    .test('is-valid-type', 'Зображення має бути в форматі .jpg, jpeg', value =>
+      isValidFileType(value && value[0]?.type)
     )
     .test(
       'is-valid-size',
@@ -40,11 +38,11 @@ export const validationSchema = Yup.object().shape({
     .test(
       'is-valid-size',
       `Мінімальний розмір зображення ${formatBytes(sizeLimitMin)}`,
-      value => value && value[0]?.size >= sizeLimitMax
+      value => value && value[0]?.size < sizeLimitMax
     )
     .required('Додайте зображення'),
   name: Yup.string().max(60).min(2).required(),
-  position: Yup.string().required(),
+  position: Yup.number().required(),
   phone: Yup.number().required(),
   email: Yup.string().email().required(),
 });

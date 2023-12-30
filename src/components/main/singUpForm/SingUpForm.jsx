@@ -11,6 +11,7 @@ import FileInput from '@/components/formik/FileInput/FileInput';
 import { useEffect, useState } from 'react';
 import useUsersStore from '@/store/usersStore';
 import { validationSchema } from './validationSchema';
+import RadioInput from '@/components/formik/RadioInput/RadioInput';
 
 const initialValues = {
   name: '',
@@ -22,7 +23,7 @@ const initialValues = {
 
 const SingUpForm = () => {
   const { getPositions } = useUsersStore();
-  const [positions, setPositions] = useState();
+  const [positions, setPositions] = useState([]);
   console.log('positions: ', positions);
   useEffect(() => {
     const fetchNews = async () => {
@@ -33,7 +34,7 @@ const SingUpForm = () => {
     };
     fetchNews();
   }, [getPositions]);
-  const onSubmit = value => {
+  const onSubmit = (value, { resetForm }) => {
     const formData = new FormData();
     formData.append('position_id', value.position);
     formData.append('name', value.name);
@@ -42,7 +43,8 @@ const SingUpForm = () => {
     formData.append('photo', value.avatar[0]);
 
     try {
-      console.log('  formData : ', formData);
+      console.log('value : ', value);
+      resetForm();
     } catch (error) {
       console.log(error);
     }
@@ -86,6 +88,26 @@ const SingUpForm = () => {
                       //   placeholder="number"
                       component={FileInput}
                     />
+
+                    <div id="my-radio-group" className={styles.positionWrapper}>
+                      Select your position
+                      <div
+                        role="group"
+                        aria-labelledby="my-radio-group"
+                        className={styles.radioInputWrapper}
+                      >
+                        {positions?.map(position => (
+                          <Field
+                            key={position.id}
+                            name="position"
+                            id="position"
+                            component={RadioInput}
+                            value={position?.id}
+                            label={position?.name}
+                          />
+                        ))}
+                      </div>
+                    </div>
 
                     <Button
                       nameButton="Sign up"
