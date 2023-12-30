@@ -6,7 +6,7 @@ import Button from '@/components/ui/Buttons/hashLink/button/Button';
 import { Field, Formik, Form } from 'formik';
 import TextInput from '@/components/formik/TextInput/TextInput';
 import EmailInput from '@/components/formik/EmailInput/EmailInput';
-import NumberInput from '@/components/formik/NumberInput/NumberInput';
+
 import FileInput from '@/components/formik/FileInput/FileInput';
 import { useEffect, useState } from 'react';
 import useUsersStore from '@/store/usersStore';
@@ -80,7 +80,7 @@ const SingUpForm = () => {
                       name="phone"
                       id="phone"
                       placeholder="phone"
-                      component={NumberInput}
+                      component={TextInput}
                     />
                     <Field
                       name="avatar"

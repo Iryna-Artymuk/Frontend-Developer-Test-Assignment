@@ -5,11 +5,14 @@ const RadioInput = ({
   field,
   value,
 
-  form: { setFieldValue },
+  form: { setFieldValue, errors },
   label,
 }) => {
-  console.log('field,: ', field.value);
-  console.log(' value: ', value);
+  const getBorderColor = () => {
+    if (errors?.[field.name]) {
+      return styles.redBorder;
+    }
+  };
 
   return (
     <>
@@ -32,6 +35,11 @@ const RadioInput = ({
         />
         {label}
       </label>
+      <div className={styles.errorWrap}>
+        {errors?.[field.name] && (
+          <p className={styles.errorMessage}>{errors?.[field.name]}</p>
+        )}
+      </div>
     </>
   );
 };

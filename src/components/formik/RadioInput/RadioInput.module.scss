@@ -36,3 +36,13 @@ input:checked {
     background-color: $secondary-color;
   }
 }
+
+.errorWrap {
+  width: 100%;
+}
+
+.errorMessage {
+  color: $red;
+  font-size: 12px;
+  font-weight: 400;
+}

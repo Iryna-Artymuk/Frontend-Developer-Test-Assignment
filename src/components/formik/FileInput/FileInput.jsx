@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 import styles from './FileInput.module.scss';
 import Dropzone from 'react-dropzone';
+import clsx from 'clsx';
 
 const FileInput = ({
   id,
@@ -13,7 +14,6 @@ const FileInput = ({
   const name = field.name;
   const [imagePreview, setImagePreview] = useState('');
   const fieldValue = field.value;
-  console.log('fieldValue : ', fieldValue);
 
   useEffect(() => {
     if (!photo) return;
@@ -36,13 +36,14 @@ const FileInput = ({
     const file = files[0];
     setFileToBase64(file);
   };
-  const getBorderColor = () => {
-    if (errors?.[field.name]) {
-      return styles.redBorder;
-    }
-  };
+
   return (
-    <div className={`${styles.wrapper} ${getBorderColor()} `}>
+    <div
+      className={clsx(
+        styles.wrapper,
+        errors?.[field.name] && styles.errorBorder
+      )}
+    >
       <Dropzone
         onDrop={onDrop}
         multiple={false}
@@ -55,7 +56,12 @@ const FileInput = ({
           <div className={styles.input}>
             <div className={styles.dropzone} {...getRootProps()}>
               <input {...getInputProps()} />
-              <div className={`${styles.upload} ${getBorderColor()} `}>
+              <div
+                className={clsx(
+                  styles.upload,
+                  errors?.[field.name] && styles.uploadError
+                )}
+              >
                 Upload
               </div>
               {!imagePreview ? (

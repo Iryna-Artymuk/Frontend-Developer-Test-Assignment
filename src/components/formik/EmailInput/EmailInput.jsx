@@ -26,16 +26,8 @@ const EmailInput = ({
   };
 
   const getBorderColor = () => {
-    if (errors?.[field.name] && isFocused === name) {
+    if (errors?.[field.name]) {
       return styles.redBorder;
-    }
-    if (!errors?.[field.name] && !isFocused === name) {
-      return styles.greenBorder;
-    } else {
-      if (isFocused === name) {
-        return styles.blueBorder;
-      }
-      return styles.grayBorder;
     }
   };
   return (
