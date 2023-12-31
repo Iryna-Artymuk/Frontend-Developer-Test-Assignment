@@ -14,6 +14,7 @@ import { validationSchema } from './validationSchema';
 import RadioInput from '@/components/formik/RadioInput/RadioInput';
 import useAuthStore from '@/store/authStore';
 import Spinner from '@/components/ui/Spinner/Spinner';
+import { formatPhone } from '@/utils/formatPhone';
 
 const initialValues = {
   photo: '',
@@ -42,12 +43,12 @@ const SingUpForm = ({ setPage, page }) => {
     fetchData();
   }, [getPositions]);
   const onSubmit = async value => {
-    console.log('value: ', value);
+    console.log('value: ', { ...value, phone: formatPhone(value.phone) });
     const formData = new FormData();
     formData.append('position_id', value.position_id);
     formData.append('name', value.name);
     formData.append('email', value.email.toLowerCase());
-    formData.append('phone', value.phone);
+    formData.append('phone', formatPhone(value.phone));
     formData.append('photo', value.photo[0]);
 
     try {
