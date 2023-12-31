@@ -9,12 +9,9 @@ function isValidFileType(fileType) {
   return fileTypes.includes(fileType);
 }
 
-const phoneRegExp =
-  /^(\+38(-| )?\(?\d{2,4}\)?(-| )?|\(?\d{2,4}\)?(-| )?)\d{3,4}(-| )?\d{2,4}$/;
 export const validationSchema = Yup.object().shape({
   photo: Yup.mixed()
     .test('is-value', 'user photo  required', value => {
-      console.log('  value: ', value);
       return value && value.length > 0;
     })
     .test('is-image-from-db', 'user photo  required', value => {

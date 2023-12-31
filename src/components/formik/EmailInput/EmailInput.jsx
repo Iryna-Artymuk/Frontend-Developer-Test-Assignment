@@ -1,18 +1,26 @@
 import styles from '../formik.module.scss';
 import clsx from 'clsx';
+import { useState } from 'react';
 
-const EmailInput = ({
-  id,
-  field,
-
-  form: { errors, touched },
-
-  placeholder,
-}) => {
+const EmailInput = ({ id, field, form: { errors, touched }, label }) => {
   const isFieldTouched = touched[field.name];
-
+  const [isFocused, setIsFocused] = useState();
+  const name = field.name;
+  const handleFocus = () => {
+    setIsFocused(name);
+  };
   return (
     <div className={styles.inputWrapper}>
+      <label
+        htmlFor={id}
+        className={clsx(
+          styles.inputLabel,
+          isFocused && styles.inputLabelActive,
+          errors?.[field.name] && styles.inputLabelError
+        )}
+      >
+        {label}
+      </label>
       <input
         id={id}
         type="email"
@@ -20,7 +28,8 @@ const EmailInput = ({
           styles.input,
           errors?.[field.name] && styles.errorBorder
         )}
-        placeholder={placeholder ? placeholder : ''}
+        onFocus={handleFocus}
+        onClick={() => setIsFocused(name)}
         {...field}
       />
 

@@ -1,5 +1,5 @@
-import Container from '../container/Container';
-import AnchorLink from '../ui/Buttons/hashLink/HashLink';
+import Container from '../../container/Container';
+import AnchorLink from '../../ui/Buttons/hashLink/HashLink';
 import styles from './Hero.module.scss';
 const Hero = () => {
   return (

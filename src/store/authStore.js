@@ -50,14 +50,17 @@ const useAuthStore = create(set => ({
       await axios
         .post(`/users`, formdata)
         .then(response => {
+          console.log('response: ', response);
+
           if (response.status === 201) {
             set(() => {
               return {
                 authLoading: false,
-                isNewUserRegister: false,
+                isNewUserRegister: true,
               };
             });
           }
+         
         })
         .catch(error => {
           set(() => {

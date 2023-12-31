@@ -1,19 +1,37 @@
 .inputWrapper {
+  position: relative;
   width: 100%;
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
 }
-
+.inputLabel {
+  position: absolute;
+  z-index: 100;
+  top: 14px;
+  left: 16px;
+  color: $gray;
+  background: $background-color;
+}
+.inputLabelActive {
+  transform: translateY(-26px);
+  left: 16px;
+  transition: all 500ms ease;
+  // background: $card-background;
+}
+.inputLabelError {
+  transform: translateY(-26px);
+  left: 16px;
+  color: $red;
+}
 .input {
   display: flex;
-
   height: 54px;
   padding: 14px 16px;
   align-items: flex-start;
   border-radius: 6px;
   border: 1px solid $gray;
-
+  background: inherit;
   color: inherit;
   font-size: 15px;
   line-height: normal;

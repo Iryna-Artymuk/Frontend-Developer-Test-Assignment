@@ -1,4 +1,4 @@
-import Hero from '@/components/hero/Hero';
+import Hero from '@/components/formik/hero/Hero';
 import SingUpForm from '@/components/main/singUpForm/SingUpForm';
 import UsersList from '@/components/main/usersList/UsersList';
 import SuccessImage from '@/components/successImage/SuccessImage';
@@ -8,8 +8,11 @@ import { useEffect, useState } from 'react';
 
 const HomePage = () => {
   const { getUsers } = useUsersStore();
-  const { isNewUserRegister } = useAuthStore();
+  const isNewUserRegister = useAuthStore(state => state.isNewUserRegister);
+
+  console.log('isNewUserRegister : ', isNewUserRegister);
   const [users, setUsers] = useState([]);
+  console.log('users: ', users);
   const [page, setPage] = useState(1);
   const [count] = useState(6);
   const [isMount, setIsMount] = useState(true);

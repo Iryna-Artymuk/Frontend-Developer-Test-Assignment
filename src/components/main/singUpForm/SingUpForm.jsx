@@ -24,15 +24,20 @@ const initialValues = {
   position_id: '',
 };
 
-const SingUpForm = ({ setPage, page }) => {
+const SingUpForm = ({ setPage, page, setUsers }) => {
   const { register, getToken } = useAuthStore();
   const authLoading = useAuthStore(state => state.authLoading);
+  const isNewUserRegister = useAuthStore(state => state.isNewUserRegister);
+  const error = useAuthStore(state => state.error);
   const token = useAuthStore(state => state.token);
   const positions = useUsersStore(state => state.positions);
-  console.log(' positions : ', positions);
   const { getPositions } = useUsersStore();
-
+  const [isMount, setIsMount] = useState(true);
   useEffect(() => {
+    if (isMount) {
+      setIsMount(false);
+      return;
+    }
     const fetchData = async () => {
       try {
         await getPositions();
@@ -41,9 +46,8 @@ const SingUpForm = ({ setPage, page }) => {
       }
     };
     fetchData();
-  }, [getPositions]);
-  const onSubmit = async value => {
-    console.log('value: ', { ...value, phone: formatPhone(value.phone) });
+  }, [getPositions, isMount]);
+  const onSubmit = async (value, { resetForm }) => {
     const formData = new FormData();
     formData.append('position_id', value.position_id);
     formData.append('name', value.name);
@@ -53,24 +57,29 @@ const SingUpForm = ({ setPage, page }) => {
 
     try {
       await getToken();
-      // await register(formData, token);
-      // resetForm();
-      // if (page === 1) {
-      //   setPage('');
-      // } else {
-      //   setPage(1);
-      // }
+      await register(formData, token);
+      setUsers([]);
+      if (page === 1) {
+        setPage('');
+      } else {
+        setPage(1);
+      }
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
-    <section>
+    <section id="signUp">
       {!authLoading ? (
         <Container>
           <div className="contentWrapper">
             <h2 className="title">Working with POST request</h2>
-
+            {error && (
+              <p className={styles.errorMessage}>
+                {error.response.data.message}
+              </p>
+            )}
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -83,19 +92,19 @@ const SingUpForm = ({ setPage, page }) => {
                       <Field
                         name="name"
                         id="name"
-                        placeholder="name"
+                        label="name"
                         component={TextInput}
                       />
                       <Field
                         name="email"
                         id="email"
-                        placeholder="email"
+                        label="email"
                         component={EmailInput}
                       />
                       <Field
                         name="phone"
                         id="phone"
-                        placeholder="phone"
+                        label="phone"
                         component={TextInput}
                         helperText="+38 (XXX) XXX - XX - XX"
                       />
