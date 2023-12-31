@@ -1,48 +1,31 @@
-import { useEffect } from 'react';
-import { useFocused } from '@/store/focusStore';
+import clsx from 'clsx';
 import styles from '../formik.module.scss';
 
 const TextInput = ({
   id,
   field,
-  form: { errors, handleBlur, touched, setFieldValue },
+  form: { errors, touched },
   placeholder,
+  helperText,
 }) => {
-  // const name = field.name;
   const isFieldTouched = touched[field.name];
-
-  // const { isFocused, setIsFocused } = useFocused();
-
-  // useEffect(() => {
-  //   if (!text) return;
-  //   setFieldValue(`${name}`, text);
-  // }, [text, setFieldValue, name]);
-
-  // const handleFocus = () => {
-  //   setIsFocused(name);
-  // };
-
-  const getBorderColor = () => {
-    if (errors?.[field.name]) {
-      return styles.redBorder;
-    }
-  };
 
   return (
     <div className={styles.inputWrapper}>
       <input
         id={id}
         type="text"
-        className={`${styles.input} ${getBorderColor()}`}
-        // onFocus={handleFocus}
-        onBlur={handleBlur}
+        className={clsx(
+          styles.input,
+          errors?.[field.name] && styles.errorBorder
+        )}
         placeholder={placeholder ? placeholder : ''}
         {...field}
       />
-
+      <p className={styles.helperText}>{helperText}</p>
       <div className={styles.commentsWrapper}>
         <div className={styles.errorWrap}>
-          {errors?.[field.name] && isFieldTouched && (
+          {errors?.[field.name] && (
             <p className={styles.errorMessage}>{errors?.[field.name]}</p>
           )}
         </div>

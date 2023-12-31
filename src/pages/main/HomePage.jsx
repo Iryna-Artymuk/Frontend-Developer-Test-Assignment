@@ -1,14 +1,16 @@
 import Hero from '@/components/hero/Hero';
 import SingUpForm from '@/components/main/singUpForm/SingUpForm';
 import UsersList from '@/components/main/usersList/UsersList';
+import SuccessImage from '@/components/successImage/SuccessImage';
+import useAuthStore from '@/store/authStore';
 import useUsersStore from '@/store/usersStore';
 import { useEffect, useState } from 'react';
 
 const HomePage = () => {
   const { getUsers } = useUsersStore();
+  const { isNewUserRegister } = useAuthStore();
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
-  console.log('page: ', page);
   const [count] = useState(6);
   const [isMount, setIsMount] = useState(true);
   useEffect(
@@ -37,7 +39,11 @@ const HomePage = () => {
     <>
       <Hero />
       <UsersList users={users} handelShowMore={handelShowMore} page={page} />
-      <SingUpForm setPage={setPage} setUsers={setUsers} page={page} />
+      {!isNewUserRegister ? (
+        <SingUpForm setPage={setPage} setUsers={setUsers} page={page} />
+      ) : (
+        <SuccessImage />
+      )}
     </>
   );
 };

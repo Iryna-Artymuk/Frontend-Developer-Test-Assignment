@@ -8,7 +8,7 @@ const Header = () => {
     <header>
       <Container>
         <div className={styles.headerWrapper}>
-          <div className={styles.contentWrapper}>
+          <div className={styles.headerContentWrapper}>
             <LogoIcon />
             <div className={styles.linkWrapper}>
               <AnchorLink text="Users" href="/#users" />

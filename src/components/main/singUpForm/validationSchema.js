@@ -1,10 +1,6 @@
-// phone - user phone number, should start with code of Ukraine +380
-// position_id - user position id. You can get list of all positions with their IDs using the API method GET api/v1/positions
-// photo - user photo should be jpg/jpeg image, with resolution at least 70x70px and size must not exceed 5MB.
-
 import { formatBytes } from '@/utils/formatBytes';
 import * as Yup from 'yup';
-
+import 'yup-phone-lite';
 const sizeLimitMax = 1024 * 1024 * 5;
 
 const fileTypes = ['image/jpg', 'image/jpeg', 'for-url'];
@@ -12,8 +8,9 @@ const fileTypes = ['image/jpg', 'image/jpeg', 'for-url'];
 function isValidFileType(fileType) {
   return fileTypes.includes(fileType);
 }
-const phoneRegExp1 = /^\+?38/;
-const phoneRegExp2 = /(\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{2}[- ]?\d{2}$/;
+
+const phoneRegExp =
+  /^(\+38(-| )?\(?\d{2,4}\)?(-| )?|\(?\d{2,4}\)?(-| )?)\d{3,4}(-| )?\d{2,4}$/;
 export const validationSchema = Yup.object().shape({
   photo: Yup.mixed()
     .test('is-value', 'user photo  required', value => {
@@ -59,11 +56,8 @@ export const validationSchema = Yup.object().shape({
     .required(),
   name: Yup.string().max(60).min(2).required(),
   phone: Yup.string()
-    .matches(phoneRegExp1, 'Phone number is not valid  must start +38')
-    .matches(
-      phoneRegExp2,
-      'Phone number is not valid  must match +38(xxx)xxx-xx-xx'
-    ),
-  position_id: Yup.number().required(),
+    .phone('UA', 'Please enter a valid phone number')
+    .required('A phone number is required'),
+  position_id: Yup.number().required('position is required'),
   email: Yup.string().required().email(),
 });

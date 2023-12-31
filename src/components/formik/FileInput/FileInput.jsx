@@ -7,18 +7,14 @@ import clsx from 'clsx';
 const FileInput = ({
   id,
   field,
-  photo,
+
   form: { errors, setFieldValue },
   ...props
 }) => {
-  const name = field.name;
+
   const [imagePreview, setImagePreview] = useState('');
   const fieldValue = field.value;
 
-  useEffect(() => {
-    if (!photo) return;
-    setFieldValue(`${name}`, [new File([], photo, { type: 'for-url' })]);
-  }, [photo, setFieldValue, name]);
 
   useEffect(() => {
     setImagePreview(fieldValue?.[0]?.name);

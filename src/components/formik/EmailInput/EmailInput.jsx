@@ -1,44 +1,25 @@
-import { useEffect } from 'react';
-import { useFocused } from '@/store/focusStore';
 import styles from '../formik.module.scss';
+import clsx from 'clsx';
 
 const EmailInput = ({
   id,
   field,
 
-
-  form: { errors, handleBlur, touched, setFieldValue },
+  form: { errors, touched },
 
   placeholder,
 }) => {
-  const name = field.name;
   const isFieldTouched = touched[field.name];
 
-  // const { isFocused, setIsFocused } = useFocused();
-
-  // useEffect(() => {
-  //   if (!text) return;
-  //   setFieldValue(`${name}`, text);
-  // }, [text, setFieldValue, name]);
-
-  // const handleFocus = () => {
-  //   setIsFocused(name);
-  // };
-
-  const getBorderColor = () => {
-    if (errors?.[field.name]) {
-      return styles.redBorder;
-    }
-  };
   return (
     <div className={styles.inputWrapper}>
       <input
         id={id}
         type="email"
-        className={`${styles.input} ${getBorderColor()} }`}
-        // onFocus={handleFocus}
-        // onBlur={handleBlur}
-        // onClick={() => setIsFocused(name)}
+        className={clsx(
+          styles.input,
+          errors?.[field.name] && styles.errorBorder
+        )}
         placeholder={placeholder ? placeholder : ''}
         {...field}
       />

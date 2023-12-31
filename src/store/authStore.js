@@ -2,9 +2,10 @@ import { create } from 'zustand';
 import axios from '@/utils/axios';
 
 const useAuthStore = create(set => ({
-  loading: false,
-  isAuthorized: false,
+  authLoading: false,
+  isNewUserRegister: false,
   token: '',
+  error: null,
 
   getToken: async () => {
     try {
@@ -17,40 +18,60 @@ const useAuthStore = create(set => ({
         .get(`/token `)
         .then(response => {
           const token = response.data.token;
-           if (token) {
-             window.localStorage.setItem('access_token', token);
-           }
+          if (token) {
+            window.localStorage.setItem('access_token', token);
+          }
           set(() => {
             return {
-              authLoadin: false,
-              isAuthorized: true,
+              authLoading: false,
               token: token,
             };
           });
         })
         .catch(error => {
           console.error('Fetch error:', error);
+          set(() => {
+            return {
+              error: error,
+            };
+          });
         });
     } catch (error) {
       console.error(error);
+      set(() => {
+        return {
+          error: error,
+        };
+      });
     }
   },
-  register: async (formdata) => {
+  register: async formdata => {
     try {
       await axios
-        .post(`/users`, formdata,)
+        .post(`/users`, formdata)
         .then(response => {
-          console.log('response : ', response );
-          set(() => {
-            return {
-              authLoadin: false,
-            };
-          });
+          if (response.status === 201) {
+            set(() => {
+              return {
+                authLoading: false,
+                isNewUserRegister: false,
+              };
+            });
+          }
         })
         .catch(error => {
-          console.error('Fetch error:', error);
+          set(() => {
+            return {
+              error: error,
+            };
+          });
         });
     } catch (error) {
+      set(() => {
+        return {
+          error: error,
+        };
+      });
       console.error(error);
     }
   },

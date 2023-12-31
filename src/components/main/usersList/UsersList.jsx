@@ -4,6 +4,7 @@ import Container from '../../container/Container';
 import User from './User';
 import styles from './UsersList.module.scss';
 import { useEffect, useState } from 'react';
+import Spinner from '@/components/ui/Spinner/Spinner';
 const UsersList = ({ users, handelShowMore, page }) => {
   const loading = useUsersStore(state => state.loading);
   const total_pages = useUsersStore(state => state.total_pages);
@@ -19,7 +20,7 @@ const UsersList = ({ users, handelShowMore, page }) => {
   return (
     <section id="users">
       <Container>
-        <div className={styles.contentWrapper}>
+        <div className="contentWrapper">
           <h2 className="title">Working with GET request</h2>
           <ul className={styles.list}>
             {sortedUsers?.map(userInfo => (
@@ -35,7 +36,7 @@ const UsersList = ({ users, handelShowMore, page }) => {
               )}
             </div>
           ) : (
-            <p>loading...</p>
+         <Spinner/>
           )}
         </div>
       </Container>

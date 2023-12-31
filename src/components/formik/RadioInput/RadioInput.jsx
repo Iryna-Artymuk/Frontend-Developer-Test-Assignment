@@ -4,16 +4,9 @@ const RadioInput = ({
   id,
   field,
   value,
-
   form: { setFieldValue, errors },
   label,
 }) => {
-  const getBorderColor = () => {
-    if (errors?.[field.name]) {
-      return styles.redBorder;
-    }
-  };
-
   return (
     <>
       <label

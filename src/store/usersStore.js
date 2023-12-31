@@ -1,12 +1,11 @@
 import { create } from 'zustand';
 import axios from '@/utils/axios';
-import { isDataValid } from '@/utils/formDataValidation';
 
 const useUsersStore = create((set, get) => ({
   loading: false,
   error: {},
   total_pages: 0,
-  positions:[],
+  positions: [],
 
   getUsers: async (page, count) => {
     try {
@@ -41,12 +40,12 @@ const useUsersStore = create((set, get) => ({
     try {
       const response = await axios.get(`/positions`);
       if (response.status === 200) {
-       set(() => {
-         return {
-           positions: response.data.positions,
-           loading: false,
-         };
-       });
+        set(() => {
+          return {
+            positions: response.data.positions,
+            loading: false,
+          };
+        });
       } else {
         throw new Error(response.statusText);
       }

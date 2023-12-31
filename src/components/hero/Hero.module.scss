@@ -11,6 +11,10 @@
   @include tabletBig {
     height: 650px;
   }
+  @include desktop {
+    width: 1170px;
+    margin: 0 auto;
+  }
 }
 .heroContentWrapper {
   @extend%aligncenter;

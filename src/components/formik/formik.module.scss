@@ -7,7 +7,7 @@
 
 .input {
   display: flex;
-  // width: 100%;
+
   height: 54px;
   padding: 14px 16px;
   align-items: flex-start;
@@ -39,10 +39,9 @@
   font-weight: 500;
 }
 
-.redBorder {
+.errorBorder {
   border: 2px solid $red;
 }
-
 
 .helperText {
   color: #7e7e7e;

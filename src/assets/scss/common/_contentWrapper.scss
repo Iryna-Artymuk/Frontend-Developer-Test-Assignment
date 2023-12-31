@@ -1,0 +1,14 @@
+.contentWrapper {
+  @extend%aligncenter;
+  flex-direction: column;
+  padding: 140px 0 140px;
+  gap: 50px;
+  h2 {
+    width: 328px;
+  }
+  @include tablet {
+    h2 {
+      width: 704px;
+    }
+  }
+}
