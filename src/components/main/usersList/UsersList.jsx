@@ -1,10 +1,13 @@
-import useUsersStore from '@/store/usersStore';
+import { useEffect, useState } from 'react';
 import Button from '../../ui/Buttons/button/Button';
 import Container from '../../container/Container';
 import User from './User';
-import styles from './UsersList.module.scss';
-import { useEffect, useState } from 'react';
 import Spinner from '@/components/ui/Spinner/Spinner';
+
+import useUsersStore from '@/store/usersStore';
+
+import styles from './UsersList.module.scss';
+
 const UsersList = ({ users, handelShowMore, page }) => {
   const loading = useUsersStore(state => state.loading);
   const total_pages = useUsersStore(state => state.total_pages);

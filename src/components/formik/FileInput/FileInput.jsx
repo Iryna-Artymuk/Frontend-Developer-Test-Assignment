@@ -11,10 +11,8 @@ const FileInput = ({
   form: { errors, setFieldValue },
   ...props
 }) => {
-
   const [imagePreview, setImagePreview] = useState('');
   const fieldValue = field.value;
-
 
   useEffect(() => {
     setImagePreview(fieldValue?.[0]?.name);

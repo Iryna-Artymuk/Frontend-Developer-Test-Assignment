@@ -5,7 +5,7 @@ const User = ({ userInfo }) => {
   return (
     <li className={styles.listItem}>
       <div className={styles.userInfoWrapper}>
-        <img className={styles.photo} src={photo} alt={name} />
+        <img className={styles.photo} loading="lazy" src={photo} alt={name} />
         <p className={styles.name}>{name}</p>
         <div className={styles.userInfo}>
           <p>{position}</p>

@@ -7,7 +7,7 @@ const SuccessImage = () => {
       <div className="contentWrapper">
         <h2 className="title"> User successfully registered</h2>
         <SuccessImageIcon />
-      </div>{' '}
+      </div>
     </Container>
   );
 };

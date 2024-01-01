@@ -1,7 +1,7 @@
 import LogoIcon from '@/components/Icons/Logo/LogoIcon';
 import AnchorLink from '@/components/ui/Buttons/hashLink/HashLink';
-import styles from './Header.module.scss';
 import Container from '@/components/container/Container';
+import styles from './Header.module.scss';
 
 const Header = () => {
   return (

@@ -1,21 +1,21 @@
+import { useEffect, useState } from 'react';
+import EmailInput from '@/components/formik/EmailInput/EmailInput';
+import { Field, Formik, Form } from 'formik';
 import FormData from 'form-data';
 import Container from '@/components/container/Container';
-import styles from './SingUpForm.module.scss';
 import Button from '@/components/ui/Buttons/button/Button';
-
-import { Field, Formik, Form } from 'formik';
 import TextInput from '@/components/formik/TextInput/TextInput';
-import EmailInput from '@/components/formik/EmailInput/EmailInput';
-
 import FileInput from '@/components/formik/FileInput/FileInput';
-import { useEffect, useState } from 'react';
-import useUsersStore from '@/store/usersStore';
-import { validationSchema } from './validationSchema';
 import RadioInput from '@/components/formik/RadioInput/RadioInput';
-import useAuthStore from '@/store/authStore';
 import Spinner from '@/components/ui/Spinner/Spinner';
-import { formatPhone } from '@/utils/formatPhone';
 
+import useAuthStore from '@/store/authStore';
+import useUsersStore from '@/store/usersStore';
+import { formatPhone } from '@/utils/formatPhone';
+import { validationSchema } from './validationSchema';
+
+import styles from './SingUpForm.module.scss';
+import { backToTop } from '@/utils/srcroll';
 const initialValues = {
   photo: '',
   phone: '',
@@ -47,7 +47,8 @@ const SingUpForm = ({ setPage, page, setUsers }) => {
     };
     fetchData();
   }, [getPositions, isMount]);
-  const onSubmit = async (value, { resetForm }) => {
+
+  const onSubmit = async value => {
     const formData = new FormData();
     formData.append('position_id', value.position_id);
     formData.append('name', value.name);
@@ -71,7 +72,7 @@ const SingUpForm = ({ setPage, page, setUsers }) => {
 
   return (
     <section id="signUp">
-      {!authLoading ? (
+      {!authLoading || !isNewUserRegister ? (
         <Container>
           <div className="contentWrapper">
             <h2 className="title">Working with POST request</h2>

@@ -1,7 +1,7 @@
-import styles from '../formik.module.scss';
 import clsx from 'clsx';
 import { useState } from 'react';
 
+import styles from '../formik.module.scss';
 const EmailInput = ({ id, field, form: { errors, touched }, label }) => {
   const isFieldTouched = touched[field.name];
   const [isFocused, setIsFocused] = useState();
@@ -16,6 +16,7 @@ const EmailInput = ({ id, field, form: { errors, touched }, label }) => {
         className={clsx(
           styles.inputLabel,
           isFocused && styles.inputLabelActive,
+          isFieldTouched && styles.inputLabelActive,
           errors?.[field.name] && styles.inputLabelError
         )}
       >

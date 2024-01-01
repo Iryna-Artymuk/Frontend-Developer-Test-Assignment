@@ -1,9 +1,16 @@
 import clsx from 'clsx';
-import styles from '../formik.module.scss';
 import { useState } from 'react';
 
-const TextInput = ({ id, field, form: { errors }, helperText, label }) => {
+import styles from '../formik.module.scss';
+const TextInput = ({
+  id,
+  field,
+  form: { errors, touched },
+  helperText,
+  label,
+}) => {
   const [isFocused, setIsFocused] = useState();
+  const isFieldTouched = touched[field.name];
   const name = field.name;
   const handleFocus = () => {
     setIsFocused(name);
@@ -15,7 +22,8 @@ const TextInput = ({ id, field, form: { errors }, helperText, label }) => {
         className={clsx(
           styles.inputLabel,
           isFocused && styles.inputLabelActive,
-          errors?.[field.name] && styles.inputLabelError
+          errors?.[field.name] && styles.inputLabelError,
+          isFieldTouched && styles.inputLabelActive
         )}
       >
         {label}
